@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822205101) do
+ActiveRecord::Schema.define(:version => 20120823163229) do
 
   create_table "boards", :id => false, :force => true do |t|
     t.string   "name"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(:version => 20120822205101) do
   end
 
   add_index "boards", ["directory"], :name => "index_boards_on_directory", :unique => true
+
+  create_table "images", :force => true do |t|
+    t.string   "src"
+    t.integer  "post_id"
+    t.integer  "src_height"
+    t.integer  "src_width"
+    t.integer  "thumbnail_height"
+    t.integer  "thumbnail_width"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "images", ["post_id"], :name => "index_images_on_post_id"
 
   create_table "operators", :force => true do |t|
     t.string   "email"
@@ -40,16 +53,13 @@ ActiveRecord::Schema.define(:version => 20120822205101) do
     t.string   "tripcode"
     t.string   "directory"
     t.integer  "parent_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.string   "image"
-    t.string   "image_height"
-    t.string   "image_width"
-    t.string   "thumbnail_height"
-    t.string   "thumbnail_width"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "image_id"
   end
 
   add_index "posts", ["directory"], :name => "index_posts_on_directory"
+  add_index "posts", ["image_id"], :name => "index_posts_on_image_id"
   add_index "posts", ["parent_id"], :name => "index_posts_on_parent_id"
 
 end

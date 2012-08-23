@@ -1,7 +1,8 @@
 class BoardsController < ApplicationController
   before_filter :find_boards, except: [:create, :delete]
   before_filter :set_board, except: [:index, :new, :create]
-  before_filter :verify_permissions, only: [:new, :create, :delete, :update]
+  before_filter :verify_permissions, 
+                only: [:new, :create, :delete, :update]
   
   def index
     @prefix = "Boards"
@@ -27,6 +28,8 @@ class BoardsController < ApplicationController
   def show
     @post  = Post.new
     @reply = Post.new
+    @image = @post.build_image
+
     if @board
       @posts = Post.where(directory: @board.directory, parent_id: nil)
       @prefix = "/#{@board.directory}/"

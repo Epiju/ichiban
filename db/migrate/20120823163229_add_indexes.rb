@@ -5,5 +5,8 @@ class AddIndexes < ActiveRecord::Migration
     
     add_index :posts, :parent_id
     add_index :posts, :directory
+    add_index :posts, :image_id
+
+    add_index :images, :post_id
   end
 end

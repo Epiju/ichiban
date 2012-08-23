@@ -1,12 +1,15 @@
-== form_for([@board, @post], autocomplete: "off") do |f|
+== form_for([@board, @post], autocomplete: "off", multipart: true) do |f|
   == f.hidden_field :directory, value: @board.directory
   == f.label :name
-  == f.text_field :name, :placeholder => "Name"
+  == f.text_field :name, placeholder: "Name"
   
   == f.label :subject
-  == f.text_field :subject, :placeholder => "Subject"
+  == f.text_field :subject, placeholder: "Subject"
 
   == f.label :body
-  == f.text_area :body, :placeholder => "Comment"
-  == f.file_field :image
+  == f.text_area :body, placeholder: "Comment"
+
+  == f.fields_for :image, @image do |i|
+    == i.file_field :image
+
   == f.submit "Submit"
