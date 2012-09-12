@@ -1,4 +1,4 @@
-module BoardSupport
+module BoardsSupport
   def create_board(options = { name: "Test Board",
                                description: "The test board.",
                                directory: "test" })
